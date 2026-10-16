@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Manifiesto del paquete UWP de Animal Crossing para Xbox Series X en modo desarrollador.
+     El nombre visible sale de identidad-visual.xlsx (columna xbox_nombre).
+     La version SUBE en cada ciclo: la consola no reemplaza un paquete por otro de la misma. -->
+<!-- animal-crossing-xbox (Recompilaciones) - el manifiesto del paquete UWP.
+
+     CAMBIALO antes de empaquetar: si el Publisher no es exactamente el sujeto del certificado con
+     que firmas, signtool falla.
+
+       - Identity Name          el nombre del paquete. Pon el tuyo.
+       - Identity Publisher     IDENTICO al sujeto de tu certificado, letra por letra.
+       - PhoneProductId         un GUID propio: [guid]::NewGuid() en PowerShell.
+       - PublisherDisplayName y DisplayName (que esta DOS veces): lo que lea la consola.
+
+     La Version la pone tools\empaquetar_uwp.ps1 con su -Version, y sube en cada paquete nuevo.
+
+     NO toques el Language="EN-US" por un x-generate: ese token lo sustituye Visual Studio, y en un
+     manifiesto hecho a mano la consola falla al registrarlo con 0x80070057.
+     docs/INSTALL.es.md §5. -->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap mp rescap">
+
+  <Identity
+    Name="CHANGE-ME-AnimalCrossing"
+    Publisher="CN=CHANGE-ME"
+    Version="0.1.0.0"
+    ProcessorArchitecture="x64" />
+
+  <mp:PhoneIdentity PhoneProductId="00000000-0000-0000-0000-000000000001" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Animal Crossing Decomp</DisplayName>
+    <PublisherDisplayName>CHANGE-ME</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <!-- ⚠ La dependencia de VCLibs NO es opcional y NO se sustituye metiendo las DLL
+       dentro del paquete. El ejecutable importa msvcp140_app.dll y
+       vcruntime140_app.dll; copiarlas al lado del .exe deja el paquete instalable
+       pero la activacion falla con 0x8027025B, sin mas explicacion. La consola ya
+       tiene el framework (lo instalo el port de Banjo-Kazooie); esta linea es la
+       que lo enlaza. Copiada literal de su manifiesto, que es el que funciona. -->
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
+    <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.33519.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+  </Dependencies>
+
+  <!-- ⚠ NO poner Language="x-generate" aqui. Ese valor es un token que MSBuild
+       sustituye al empaquetar, y este paquete se arma a mano con makeappx: la
+       consola lo acepta, lo despliega y falla al registrarlo con
+       0x80070057 «the specified resource language 'x-generate' is not a valid
+       language». Costo un ciclo entero de instalacion. -->
+  <Resources>
+    <Resource Language="EN-US"/>
+    <Resource uap:Scale="200"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App" Executable="AnimalCrossing.exe" EntryPoint="uwp.App">
+      <!-- Solo sq y ss: el mosaico ancho no lo dibuja la consola en modo desarrollador. -->
+      <uap:VisualElements
+        DisplayName="Animal Crossing Decomp"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png"
+        Description="Port UWP de Animal Crossing (decomp ACreTeam / port flyngmt) para Xbox Series X en modo desarrollador"
+        BackgroundColor="transparent">
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:DefaultTile/>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust"/>
+    <rescap:Capability Name="broadFileSystemAccess" />
+    <rescap:Capability Name="expandedResources" />
+    <Capability Name="internetClient" />
+    <uap:Capability Name="removableStorage"/>
+    <Capability Name="codeGeneration"/>
+  </Capabilities>
+</Package>

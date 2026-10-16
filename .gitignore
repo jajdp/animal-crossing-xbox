@@ -1,0 +1,61 @@
+# Nothing that belongs to the game ever goes in here. Blocked by extension.
+
+# discs and dumps
+*.iso
+*.gcm
+*.rvz
+*.ciso
+*.nkit
+*.gci
+
+# build output
+*.exe
+*.dll
+*.lib
+*.obj
+*.o
+*.a
+*.pdb
+*.map
+*.rsp
+*.msix
+*.appx
+build/
+build-*/
+layout/
+
+# signing certificates: yours is yours
+*.pfx
+*.p12
+*.cer
+*.snk
+
+# saves and logs
+*.sav
+*.raw
+*.log
+errores*.txt
+salida*.txt
+
+# the fork's own tree, in case this is cloned next to it
+acgc-64/
+uwp-dep/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# editors and OS
+.vs/
+.vscode/
+.idea/
+*.swp
+*.tmp
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# The package tiles are supplied by whoever packages (docs/ASSETS.md).
+package/Assets/*.png

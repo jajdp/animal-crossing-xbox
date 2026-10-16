@@ -1,0 +1,32 @@
+# Line endings, fixed here so that a clone gives the same bytes on any machine.
+#
+# This matters more than usual: the four files under src/ are copied byte for byte into the game
+# tree, and the patches compare anchors against files whose endings .gitattributes governs on the
+# upstream side too. Leaving it to each machine's core.autocrlf would make "did the recipe
+# reproduce the tree?" depend on who cloned it.
+
+*               text=auto eol=lf
+
+# PowerShell is happier with CRLF on Windows, and these scripts only ever run there.
+*.ps1           text eol=crlf
+
+# cmd.exe splits a .bat saved with LF in the wrong places: CRLF, always.
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+
+# Shell scripts must be LF, or the shebang line carries a stray \r and the script will not run.
+*.sh            text eol=lf
+
+# A patch has to match the endings of the tree it is applied to, and upstream is LF.
+*.patch         text eol=lf
+*.diff          text eol=lf
+
+# Markdown, plain config and the manifest: LF, like everything else.
+*.md            text eol=lf
+*.toml          text eol=lf
+*.appxmanifest  text eol=lf
+
+# Images are bytes: git must neither convert them nor try to diff them.
+*.png           binary
+*.jpg           binary
+*.ico           binary
