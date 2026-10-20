@@ -5,6 +5,15 @@ All notable changes to this repository. Dates are `YYYY-MM-DD`.
 The versions here are **the repository's**, not the package's. The package version is whatever you
 pass to `empaquetar_uwp.ps1 -Version`, and it has to go up on every package you install.
 
+## [1.0.1] — 2026-10-20
+
+### Changed
+
+- **The README now says which console this was tested on, and which one it was not.** Everything here
+  was built and measured on an **Xbox Series X** in Developer Mode; a **Series S has never been tried**,
+  so nothing here says anything about one. The wording used to say "Xbox Series", which reads as if it
+  covered both, and it does not.
+
 ## [1.0.0] — 2026-10-13
 
 First publication. The recipe for the UWP port, as it was applied to the build that runs — and is
