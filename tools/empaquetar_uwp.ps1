@@ -3,14 +3,14 @@
   Empaqueta y firma AnimalCrossing.exe como .msix para la Xbox Series X.
 
 .DESCRIPTION
-  A diferencia de Banjo-Kazooie, aqui NO hay proyecto de Visual Studio: el
-  ejecutable lo produce clang + lld directamente (herramientas\construir_uwp.py),
+  Aqui NO hay proyecto de Visual Studio: el ejecutable lo produce clang + lld
+  directamente (herramientas\construir_uwp.py),
   asi que el paquete se arma a mano con makeappx y se firma con signtool. Es mas
   corto y no depende de MSBuild.
 
   El contenido del paquete es deliberadamente pequeno: el ejecutable, sus DLL, los
   dos shaders y los mosaicos. LA IMAGEN DEL DISCO NO VA DENTRO (1,36 GiB): se sube
-  aparte a LocalState con el Device Portal, igual que el .o2r de Star Fox 64.
+  aparte a LocalState con el Device Portal.
 
 .PARAMETER Version
   Sube en cada ciclo: la consola no reemplaza un paquete por otro de la MISMA version.
@@ -76,14 +76,15 @@ foreach ($d in $dlls) {
   if (Test-Path $o) { Copy-Item $o $layout } else { Write-Host "  ! falta $d" }
 }
 if ($Mesa -eq 'mesa-banjo') {
-  # El juego COMPLETO de Banjo-Kazooie, SDL2 y libuwp incluidos. Es la unica opcion
-  # que toca esas dos, y a proposito: lo que se compara es la combinacion entera.
+  # Un conjunto COMPLETO: Mesa 25.1.1 con el SDL2 y el libuwp que venian con ella.
+  # Es la unica opcion que toca esas dos, y a proposito: lo que se compara es la
+  # combinacion entera, no una DLL suelta.
   foreach ($d in @("opengl32.dll", "libgallium_wgl.dll", "z-1.dll", "dxil.dll",
                    "libuwp.dll", "SDL2.dll", "glfw3.dll")) {
     $o = Join-Path $dep "mesa-banjo\$d"
     if (Test-Path $o) { Copy-Item $o $layout -Force } else { throw "falta $o" }
   }
-  Write-Host "  DLL: las de Banjo-Kazooie (Mesa 25.1.1, su SDL2 y su libuwp)"
+  Write-Host "  DLL: el conjunto completo (Mesa 25.1.1, su SDL2 y su libuwp)"
 } elseif ($Mesa -ne 'bundle') {
   foreach ($d in @("opengl32.dll", "libgallium_wgl.dll", "z-1.dll", "dxil.dll")) {
     $o = Join-Path $dep "$Mesa\$d"
@@ -103,8 +104,9 @@ if ($Mesa -eq 'mesa-banjo') {
 # ACTIVARSE con 0x8027025B, un error que no explica nada. Lo que hace falta es
 # declararlas como framework en el manifiesto (<PackageDependency> de
 # Microsoft.VCLibs.140.00), que es lo que hacen todos los paquetes que si
-# arrancan en esta consola. El framework ya esta instalado desde el port de
-# Banjo-Kazooie.
+# arrancan en esta consola. En la consola donde se probo ya estaba instalado; si
+# la suya no lo tiene, hay que instalarlo aparte: el Device Portal acepta
+# paquetes de dependencia junto al principal.
 
 
 # Los shaders: el juego los abre con ruta relativa y el envoltorio los copia a

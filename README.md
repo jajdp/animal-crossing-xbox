@@ -22,11 +22,11 @@ none of the numbers here are a promise about that console.
 
 ## What this repository is
 
-**A recipe and the tools that apply it.** The method is the same one used for the *Diddy Kong
-Racing* port, and it is what makes this maintainable: instead of writing a second CMake project for
-the console, **the desktop build is translated**. `construir_uwp.py` asks `ninja` for the desktop
-tree's commands — 3 997 objects — rewrites them into the console's dialect (clang with the MSVC ABI,
-the "store" CRT, `/APPCONTAINER`) and runs them again. A file upstream adds shows up on its own.
+**A recipe and the tools that apply it.** The method is what makes this maintainable: instead of
+writing a second CMake project for the console, **the desktop build is translated**.
+`construir_uwp.py` asks `ninja` for the desktop tree's commands — 3 997 objects — rewrites them
+into the console's dialect (clang with the MSVC ABI, the "store" CRT, `/APPCONTAINER`) and runs
+them again. A file upstream adds shows up on its own.
 
 | Piece | What it is |
 |---|---|

@@ -22,9 +22,9 @@ dice este README, y ninguna de las cifras de aquí es una promesa sobre esa cons
 
 ## Qué es este repositorio
 
-**Una receta y las herramientas que la aplican.** El método es el mismo que se usó en el port de
-*Diddy Kong Racing*, y es lo que hace que esto se pueda mantener: en vez de escribir un segundo
-proyecto de CMake para la consola, **se traduce la compilación de escritorio**. `construir_uwp.py`
+**Una receta y las herramientas que la aplican.** El método es lo que hace que esto se pueda
+mantener: en vez de escribir un segundo proyecto de CMake para la consola, **se traduce la
+compilación de escritorio**. `construir_uwp.py`
 le pide a `ninja` las órdenes del árbol de PC —3 997 objetos—, las reescribe al dialecto de la
 consola (clang con ABI de MSVC, el CRT «store», `/APPCONTAINER`) y las vuelve a ejecutar. Un archivo
 que el proyecto de arriba añada aparece solo.

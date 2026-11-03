@@ -337,7 +337,7 @@ def main():
     print("Lo que NO se parchea aqui, porque se resuelve en la linea de ordenes:")
     print("  - _m_prefetch: lo declara SDL2 «hasta que arreglen clang 11» y en")
     print("    clang 22 ya es un builtin -> se define su guarda __PRFCHWINTRIN_H")
-    print("    (misma trampa que en Diddy Kong Racing).")
+    print("    (incluir <intrin.h> entero en su lugar rompe seis archivos mas).")
     print("  - dirent.h / strings.h / unistd.h: no existen en MSVC -> los aporta")
     print("    fuentes\\compat\\ por delante en el orden de busqueda.")
     return 0

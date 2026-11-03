@@ -42,9 +42,9 @@
   <!-- ⚠ La dependencia de VCLibs NO es opcional y NO se sustituye metiendo las DLL
        dentro del paquete. El ejecutable importa msvcp140_app.dll y
        vcruntime140_app.dll; copiarlas al lado del .exe deja el paquete instalable
-       pero la activacion falla con 0x8027025B, sin mas explicacion. La consola ya
-       tiene el framework (lo instalo el port de Banjo-Kazooie); esta linea es la
-       que lo enlaza. Copiada literal de su manifiesto, que es el que funciona. -->
+       pero la activacion falla con 0x8027025B, sin mas explicacion. La consola
+       tiene que tener el framework instalado; esta linea es la que lo enlaza, y va
+       copiada literal de un manifiesto que si arranca en esta consola. -->
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
     <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.33519.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />

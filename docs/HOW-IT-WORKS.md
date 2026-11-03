@@ -8,7 +8,7 @@ The *Animal Crossing* decompilation builds for the PC with GCC from a generated 
 to a console has two routes: write a second CMake project for `WindowsStore` — and keep it current
 every time upstream adds a file — or **translate the build that already exists**.
 
-This port does the latter, like the *Diddy Kong Racing* one: `construir_uwp.py` runs
+This port does the latter: `construir_uwp.py` runs
 `ninja -t commands` on the desktop build, takes its 3 997 compile commands, rewrites them — clang
 with the MSVC ABI instead of GCC, the "store" CRT, the console's headers — and runs them again. Then
 it links with `ld.lld` and `/APPCONTAINER`.

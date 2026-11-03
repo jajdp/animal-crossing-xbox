@@ -9,7 +9,7 @@ eso a una consola tiene dos caminos: escribir un segundo proyecto de CMake para 
 mantenerlo al día cada vez que el proyecto de arriba añade un archivo— o **traducir la compilación
 que ya existe**.
 
-Este port hace lo segundo, igual que el de *Diddy Kong Racing*: `construir_uwp.py` ejecuta
+Este port hace lo segundo: `construir_uwp.py` ejecuta
 `ninja -t commands` sobre la build de escritorio, toma las 3 997 órdenes de compilación, las
 reescribe —clang con ABI de MSVC en vez de GCC, el CRT «store», las cabeceras de la consola— y las
 vuelve a ejecutar. Después enlaza con `ld.lld` y `/APPCONTAINER`.

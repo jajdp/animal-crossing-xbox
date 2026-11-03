@@ -4,9 +4,8 @@
 // compila renombrado a acgc_game_main (-Dmain=acgc_game_main), porque en UWP el
 // main de verdad lo pone SDL con SDL_WinRTRunApp.
 //
-// Como en los ports de Diddy Kong Racing y Banjo-Kazooie, la plantilla C++/CX de
-// SDL no se usa: lo que hay que hacer cabe en C++ normal, y ademas clang no
-// compila C++/CX.
+// La plantilla C++/CX de SDL no se usa: lo que hay que hacer cabe en C++ normal,
+// y ademas clang no compila C++/CX.
 //
 // TRES COSAS QUE NO SON OPCIONALES:
 //
@@ -22,8 +21,9 @@
 // 2. ACTIVAR LA CoreWindow. Una aplicacion WinRT que no llama a Activate() al
 //    arrancar se da por colgada y el sistema la cierra a los pocos segundos, sin
 //    dejar volcado. Aqui la ventana la crea SDL, que normalmente activa sola,
-//    pero se hace explicito porque en Banjo-Kazooie eso costo horas de
-//    diagnostico y no cuesta nada dejarlo puesto.
+//    pero se hace explicito porque no cuesta nada y, cuando falta, lo que se ve
+//    es un cierre a los pocos segundos y ningun volcado: horas de diagnostico
+//    para algo que se deja resuelto en una linea.
 //
 // 3. LA BITACORA DE ARRANQUE. En una consola no hay stderr. Si algo lanza dentro
 //    del juego, la excepcion sube al bucle de WinRT, que la convierte en un

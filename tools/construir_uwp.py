@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """Construye AnimalCrossing.exe para Xbox Series X (UWP, AppContainer).
 
-EL METODO, que es el de Diddy Kong Racing y Sonic Advance: no se reimplementa la
-build. Se toma la build de escritorio que YA FUNCIONA (CMake + ninja + gcc de 64
+EL METODO: no se reimplementa la build. Se toma la build de escritorio que YA FUNCIONA (CMake + ninja + gcc de 64
 bits), se le piden sus ordenes reales y se traduce cada una a clang con ABI de
 MSVC. Lo que compila en el escritorio compila aqui, con las mismas banderas y los
 mismos includes; lo unico que cambia es el compilador, el CRT y el enlazador.
@@ -85,8 +84,8 @@ SUAVES_CXX = ["-Wno-register", "-Wno-c++11-narrowing", "-Wno-writable-strings"]
 
 # __PRFCHWINTRIN_H: SDL2 declara _m_prefetch «hasta que arreglen clang 11» y en
 # clang 22 ya es un builtin, asi que choca. Se define la guarda de la cabecera de
-# clang para que gane la de SDL. Misma trampa que en Diddy Kong Racing; ahi se
-# probo incluir <intrin.h> entero y fue PEOR (rompio seis archivos mas).
+# clang para que gane la de SDL. Se probo incluir <intrin.h> entero en vez de
+# definir la guarda, y fue PEOR: rompio seis archivos mas.
 # strdup: el CRT «store» no lo exporta (la cabecera lo declara dllimport y la
 # biblioteca no lo tiene). El nombre con guion bajo, que es el oficial de MSVC, si
 # esta. Ningun archivo del arbol DEFINE una funcion llamada strdup, asi que
