@@ -5,6 +5,19 @@ All notable changes to this repository. Dates are `YYYY-MM-DD`.
 The versions here are **the repository's**, not the package's. The package version is whatever you
 pass to `empaquetar_uwp.ps1 -Version`, and it has to go up on every package you install.
 
+## [1.0.3] — 2026-11-03
+
+### Changed
+
+- **One reference the 1.0.2 sweep missed.** `tools/acgc_parches.py` still explained the alignment
+  patch by comparing it with another port's. It now says what the fault *is* — an alignment bug,
+  and those do not show the symptom where the cause is — and points at the other one in this same
+  file, the ARAM's, which is the part worth knowing.
+
+The sweep missed it for a reason worth writing down: it filtered its own output **by file name**
+to drop false positives, and since the file is called `acgc_parches.py`, that dropped every line
+of it along with them. Filter the matched text, never the path.
+
 ## [1.0.2] — 2026-11-03
 
 ### Changed

@@ -266,9 +266,11 @@ def p_attribute_align(s):
     ABI de MSVC, y `__attribute__((aligned(num)))` detras del declarador es valido.
     Basta con que la primera rama lo reconozca.
 
-    Es primo hermano del `ALIGNED(4)` de Sonic Advance: alli el atributo estaba
-    puesto de menos, aqui desaparecia entero. Tercera alineacion que tumba un
-    port en un mes, contando la de la ARAM de aqui al lado.
+    Es un fallo de alineacion, y son de los que no dan el sintoma donde esta la
+    causa: aqui el atributo desaparecia entero y nada avisaba de ello. En este
+    mismo archivo hay otro de la misma familia —el de la ARAM—, asi que conviene
+    sospechar de la alineacion cuando algo falla de forma reproducible y «por
+    poco».
     """
     viejo = "#if defined(__MWERKS__) || defined(__GNUC__)\n#define ATTRIBUTE_ALIGN(num) __attribute__((aligned(num)))"
     nuevo = ("/* __clang__ va aqui a proposito: con ABI de MSVC, clang define _MSC_VER y\n"
