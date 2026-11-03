@@ -88,6 +88,21 @@ camino. El detalle está en **[`docs/HOW-IT-WORKS.es.md`](docs/HOW-IT-WORKS.es.m
 
 ## Créditos y licencia
 
+**Casi nada de lo que hace que esto funcione es nuestro.** Este repositorio es una receta que une el trabajo de otros; sin cualquiera de estas piezas no habría port.
+
+| Qué hace | Quién lo hizo | Licencia |
+|---|---|---|
+| **[ACGC-PC-Port](https://github.com/birabittoh/ACGC-PC-Port)** — el port a PC de esa decompilación | **birabittoh** | see the project |
+| **[ac-decomp](https://github.com/ACreTeam/ac-decomp)** — decompila *Animal Crossing* | **ACreTeam** | see the project |
+| **[uwp-dep](https://github.com/worleydl/uwp-dep)** — Dawn, SDL3, nod y dxcompiler **compilados para UWP**: la única razón por la que algo de esto corre en una Xbox | **Daniel Worley** (worleydl) | libuwp: zlib, © 2025 |
+| **[SDL](https://github.com/libsdl-org/SDL)** — ventana, mando y audio | **Sam Lantinga** and the SDL contributors | zlib |
+| **[Mesa](https://mesa3d.org)** — la implementación de OpenGL que se usa en la consola | the **Mesa** contributors | MIT |
+
+Mención especial a **Daniel Worley**: las compilaciones UWP de `uwp-dep` son lo que hace posible este port a Xbox. No las hicimos nosotros, las usamos.
+
+**La receta de empaquetado, las herramientas y esta documentación** son de **Recompilaciones**.
+
+
 Port y herramientas de **Recompilaciones**. Publicado bajo la [MIT](LICENSE), que es la licencia de
 la capa de port del fork (© 2026 FlyingMeta); la decompilación de ACreTeam de la que todo esto sale
 está en **CC0** (dominio público).
